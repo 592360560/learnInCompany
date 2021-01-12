@@ -1,6 +1,7 @@
 package cn.ztal.learn.rabbit;
 
 import cn.ztal.learn.model.Message;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -21,5 +22,12 @@ class RabbitMqUtilsTest {
         m.setTitle("this is title2");
         rabbitTemplate.convertAndSend("Direct exchange","key fq-ex",m);
 //        rabbitTemplate.convertAndSend("ztal","ztal's message");
+    }
+
+    @Test
+    void read() {
+        Object o = rabbitTemplate.receiveAndConvert("first-queue");
+        Message m = (Message) o;
+        System.out.println(m.toString());
     }
 }
