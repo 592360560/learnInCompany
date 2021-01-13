@@ -4,6 +4,7 @@ import cn.ztal.learn.model.Message;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,8 +29,9 @@ class RabbitMqUtilsTest {
 
     @Test
     void read() {
-        Object o = rabbitTemplate.receiveAndConvert("first-queue");
-        Message m = (Message) o;
-        System.out.println(m.toString());
+//        Object o = rabbitTemplate.receiveAndConvert("first-queue");
+//        Message m = (Message) o;
+//        System.out.println(m.toString());
+
     }
 }
