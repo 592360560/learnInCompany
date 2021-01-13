@@ -1,0 +1,21 @@
+spring:
+  rabbitmq:
+    host: 123.57.60.147
+    port: 5672
+    username: ztal
+    password: 123456
+    virtual-host: learnMq
+
+    listener:
+      simple:
+        concurrency: 1
+        acknowledge-mode: manual
+        max-concurrency: 1
+        retry:
+          enabled: true
+
+server:
+  port: 8080
+
+
+

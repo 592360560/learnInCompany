@@ -8,11 +8,16 @@ import org.slf4j.Logger;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 //@ExtendWith(SpringExtension.class)
 @SpringBootTest
+//@ContextConfiguration(locations = "classpath:application.properties")
+//@TestPropertySource("classpath:application.properties")
 class RabbitMqUtilsTest {
     @Autowired
     private RabbitTemplate rabbitTemplate;

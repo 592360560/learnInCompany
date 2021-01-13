@@ -12,8 +12,8 @@ import javax.annotation.Resource;
 public class Run {
     @Autowired
     private RabbitTemplate rabbitTemplate;
-    @Autowired
-    private RabbitConfig rabbitConfig;
+//    @Autowired
+//    private RabbitConfig rabbitConfig;
 //    @Resource(name = "firstQueue")
 //    private Queue firstQueue;
 
