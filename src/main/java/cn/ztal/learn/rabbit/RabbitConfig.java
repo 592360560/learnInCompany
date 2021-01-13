@@ -20,15 +20,15 @@ public class RabbitConfig {
 //    @Autowired
 //    RabbitAdmin rabbitAdmin;
 
-    @Bean
-    public DirectExchange exchange() { // 使用直连的模式
-        return new DirectExchange(EXCHANGE, true, false);
-    }
-    @Bean
-    public Binding bindingAueue() {
-//        return BindingBuilder.bind(queueInsureAdd()).to(exchange()).with(ROUTINGKEY);
-        return BindingBuilder.bind(firstQueue()).to(this.exchange()).with("key fq-ex");
-    }
+//    @Bean
+//    public DirectExchange exchange() { // 使用直连的模式
+//        return new DirectExchange(EXCHANGE, true, false);
+//    }
+//    @Bean
+//    public Binding bindingAueue() {
+////        return BindingBuilder.bind(queueInsureAdd()).to(exchange()).with(ROUTINGKEY);
+//        return BindingBuilder.bind(firstQueue()).to(this.exchange()).with("key fq-ex");
+//    }
 
     @Bean("firstQueue")
     public Queue firstQueue(){

@@ -17,10 +17,12 @@ class RabbitMqUtilsTest {
     private RabbitTemplate rabbitTemplate;
     @Test
     void sent() {
-        Message m = new Message();
-        m.setInfo("say something2");
-        m.setTitle("this is title2");
-        rabbitTemplate.convertAndSend("Direct exchange","key fq-ex",m);
+        for (int i = 0; i < 10; i++) {
+            Message m = new Message();
+            m.setInfo("say something "+i);
+            m.setTitle("this is title "+i);
+            rabbitTemplate.convertAndSend("","first-queue",m);
+        }
 //        rabbitTemplate.convertAndSend("ztal","ztal's message");
     }
 
