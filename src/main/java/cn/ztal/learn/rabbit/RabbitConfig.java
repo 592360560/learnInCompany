@@ -30,7 +30,7 @@ public class RabbitConfig {
 ////        return BindingBuilder.bind(queueInsureAdd()).to(exchange()).with(ROUTINGKEY);
 //        return BindingBuilder.bind(firstQueue()).to(this.exchange()).with("key fq-ex");
 //    }
-
+    //1.简单模式、2.工作模式
     @Bean("firstQueue")
     public Queue firstQueue(){
        return new Queue(QUEUE_NAME1,true,false,false,null);
