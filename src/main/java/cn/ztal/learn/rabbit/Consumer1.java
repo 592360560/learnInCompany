@@ -13,11 +13,11 @@ import java.io.IOException;
 public class Consumer1 {
     @RabbitListener(queues = "first-queue")
     public void processMessage(Message msg, Channel channel) {
-        System.out.println("Consumer1 = " + msg.getBody());
+        System.out.println("Consumer1 = " + msg.getBody().toString());
         try {
-//            Thread.sleep(1500);
-            channel.basicAck(msg.getMessageProperties().getDeliveryTag(),true);
-        } catch (IOException e) {
+            Thread.sleep(1000);
+            channel.basicAck(msg.getMessageProperties().getDeliveryTag(),false);
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }

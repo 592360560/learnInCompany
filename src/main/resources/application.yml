@@ -8,14 +8,15 @@ spring:
 
     listener:
       simple:
-        concurrency: 1
+#        concurrency: 1
         acknowledge-mode: manual
-        max-concurrency: 1
+#        max-concurrency: 1
         retry:
           enabled: true
+        prefetch: 1
 
 server:
-  port: 8080
+  port: 8888
 
 
 
