@@ -14,7 +14,7 @@ public class RabbitContrroller {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @RequestMapping("/sent")
+    @RequestMapping("/sentDirect")
     public String sent(String message){
         for (int i = 0; i < 10; i++) {
             Message m = new Message();
@@ -28,6 +28,22 @@ public class RabbitContrroller {
             rabbitTemplate.convertAndSend("","first-queue",m);
         }
         return "ok";
+    }
+
+    @RequestMapping("/sentFanout")
+    public String sentFanout(String message){
+        for (int i = 0; i < 10; i++) {
+            Message m = new Message();
+            if (message !=null){
+                m.setInfo("say sentFanout "+i+message);
+                m.setTitle("this is sentFanout "+i+message);
+            }else {
+                m.setInfo("say sentFanout "+i);
+                m.setTitle("this is sentFanout "+i);
+            }
+            rabbitTemplate.convertAndSend("Fanout_Exchange",null,m);
+        }
+        return "sentFanout ok";
     }
 
 }
