@@ -27,11 +27,7 @@ public class RabbitConfig {
         // 使用直连的模式
         return new DirectExchange(EXCHANGE, true, false);
     }
-    @Bean
-    public FanoutExchange fanoutExchange() {
-        // 使用发布/订阅（fanout）模式
-        return new FanoutExchange(FANOUT_EXCHANGE, true, false);
-    }
+
     @Bean
     public Binding bindingAueue() {
         //根据key匹配的交换器是直连（direct）模式交换器
@@ -43,26 +39,36 @@ public class RabbitConfig {
        return new Queue(QUEUE_NAME1,true,false,false,null);
     }
     //2.发布/订阅模式 (一个路由 发送到不同的队列（不指定Routing Key）)
-    @Bean("fanoutQueue1")
-    public Queue fanoutQueue1(){
-        return new Queue(FANOUT_QUEUE_NAME1,true,false,true,null);
-    }
-    @Bean("fanoutQueue2")
-    public Queue fanoutQueue2(){
-        return new Queue(FANOUT_QUEUE_NAME2,true,false,true,null);
-    }
-    @Bean
-    public Binding fanoutQueue1Bind() {
-        //不需要key匹配的交换器是 发布/订阅（fanout）模式交换器
-        //绑定队列
-        return BindingBuilder.bind(fanoutQueue1()).to(fanoutExchange());
-    }
-    @Bean
-    public Binding fanoutQueue2Bind() {
-        //不需要key匹配的交换器是 发布/订阅（fanout）模式交换器
-        //绑定队列
-        return BindingBuilder.bind(fanoutQueue2()).to(fanoutExchange());
-    }
+//    @Bean("fanoutQueue1")
+//    public Queue fanoutQueue1(){
+//        return new Queue(FANOUT_QUEUE_NAME1,true,false,true,null);
+//    }
+
+
+
+
+    // 使用发布/订阅（fanout）模式
+//    @Bean
+//    public FanoutExchange fanoutExchange() {
+//        // 使用发布/订阅（fanout）模式
+//        return new FanoutExchange(FANOUT_EXCHANGE, true, false);
+//    }
+//    @Bean("fanoutQueue2")
+//    public Queue fanoutQueue2(){
+//        return new Queue(FANOUT_QUEUE_NAME2,true,false,true,null);
+//    }
+//    @Bean
+//    public Binding fanoutQueue1Bind() {
+//        //不需要key匹配的交换器是 发布/订阅（fanout）模式交换器
+//        //绑定队列
+//        return BindingBuilder.bind(fanoutQueue1()).to(fanoutExchange());
+//    }
+//    @Bean
+//    public Binding fanoutQueue2Bind() {
+//        //不需要key匹配的交换器是 发布/订阅（fanout）模式交换器
+//        //绑定队列
+//        return BindingBuilder.bind(fanoutQueue2()).to(fanoutExchange());
+//    }
 
 
 
