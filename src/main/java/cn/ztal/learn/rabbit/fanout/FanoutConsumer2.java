@@ -13,14 +13,14 @@ import java.io.IOException;
 
 @Component
 public class FanoutConsumer2 {
-//    @RabbitListener(queues = "fanout_queue2")
+//    @RabbitListener(queues = {"fanout_queue1","fanout_queue2"})
 @RabbitListener(
-        bindings = {@QueueBinding(value = @Queue, exchange = @Exchange("Fanout_Exchange"))
+        bindings = {@QueueBinding(value = @Queue, exchange = @Exchange(value = "Fanout_Exchange",type = "fanout"))
         })
     public void processMessage(Message msg, Channel channel) {
-        System.out.println("FanoutConsumer2 = " + msg.getBody().toString());
+        System.out.println("FanoutConsumer2 = " + new String(msg.getBody()));
         try {
-            Thread.sleep(1500);
+            Thread.sleep(500);
             channel.basicAck(msg.getMessageProperties().getDeliveryTag(),false);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
