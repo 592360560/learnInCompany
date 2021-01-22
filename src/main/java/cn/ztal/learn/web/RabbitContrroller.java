@@ -59,7 +59,24 @@ public class RabbitContrroller {
             rabbitTemplate.convertAndSend("Direct_Exchange","error",m+"error");
             rabbitTemplate.convertAndSend("Direct_Exchange","info",m+"info");
         }
-        return "sentFanout ok";
+        return "sentDirect ok";
+    }
+
+    @RequestMapping("/sentToipc")
+    public String sentToipc(String message){
+        for (int i = 0; i < 10; i++) {
+            Message m = new Message();
+            if (message !=null){
+                m.setInfo("say sentDirect "+i+message);
+                m.setTitle("this is sentDirect "+i+message);
+            }else {
+                m.setInfo("say sentDirect "+i);
+                m.setTitle("this is sentDirect "+i);
+            }
+            rabbitTemplate.convertAndSend("Topic_Exchange","log.error",m+"error");
+            rabbitTemplate.convertAndSend("Topic_Exchange","log.info",m+"count");
+        }
+        return "sentToipc ok";
     }
 
 }
