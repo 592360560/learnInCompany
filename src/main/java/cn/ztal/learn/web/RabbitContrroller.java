@@ -14,7 +14,7 @@ public class RabbitContrroller {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @RequestMapping("/sentDirect")
+    @RequestMapping("/sentWork")
     public String sent(String message){
         for (int i = 0; i < 10; i++) {
             Message m = new Message();
@@ -25,7 +25,7 @@ public class RabbitContrroller {
                 m.setInfo("say something "+i);
                 m.setTitle("this is title "+i);
             }
-            rabbitTemplate.convertAndSend("","first-queue",m);
+            rabbitTemplate.convertAndSend("","first-queue",m.toString());
         }
         return "ok";
     }
@@ -41,7 +41,23 @@ public class RabbitContrroller {
                 m.setInfo("say sentFanout "+i);
                 m.setTitle("this is sentFanout "+i);
             }
-            rabbitTemplate.convertAndSend("Fanout_Exchange",null,m);
+            rabbitTemplate.convertAndSend("Fanout_Exchange",null,m.toString());
+        }
+        return "sentFanout ok";
+    }
+    @RequestMapping("/sentDirect")
+    public String sentDirect(String message){
+        for (int i = 0; i < 10; i++) {
+            Message m = new Message();
+            if (message !=null){
+                m.setInfo("say sentDirect "+i+message);
+                m.setTitle("this is sentDirect "+i+message);
+            }else {
+                m.setInfo("say sentDirect "+i);
+                m.setTitle("this is sentDirect "+i);
+            }
+            rabbitTemplate.convertAndSend("Direct_Exchange","error",m+"error");
+            rabbitTemplate.convertAndSend("Direct_Exchange","info",m+"info");
         }
         return "sentFanout ok";
     }
